@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        
+        <style>
+         
+        </style>
+        <title>Add messages</title>
+</head>
+<body class="bg-neutral-400 flex flex-col justify-center items-center h-screen font-serif text-3xl gap-4">
+ <div class="flex flex-col justify-center items-center gap-4 mb-5"> 
+    <h1>Add a message</h1>
+    <button id="back-btn" class="bg-neutral-500 hover:bg-neutral-600 transition-colors ease-in-out text-white text-xl p-5 rounded-full">
+    Home
+    </button> 
+    <form id="add-message-form">
+        <input type="text" id="message-input" name="message" placeholder="Enter your message" class="p-2 rounded border border-neutral-600 text-xl"/>
+        <button type="submit" class="bg-neutral-500 hover:bg-neutral-600 transition-colors ease-in-out text-white text-xl p-2 rounded ml-2">Submit</button>
+    </form>
+</div>
+<span id="status-message" class="text-lg h-10 w-full flex items-center justify-center"></span>
+</body>
+<script>
+   document.getElementById('back-btn').onclick = function() {
+        window.location.href = '/';
+    };  
+    document.getElementById('add-message-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const content = document.getElementById('message-input').value;
+       
+        fetch('/add_message_db', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content: content })
+        }).then(response => response.json())
+        .then(data => {
+            console.log(data.status);
+            document.getElementById('message-input').value = '';
+            document.getElementById('status-message').textContent = 'Message added successfully!';
+            setTimeout(() => {
+                document.getElementById('status-message').textContent = '';
+            }, 3000);
+
+        })
+        .catch(error => {
+            alert('Error adding message');
+        });
+
+    });
+</script>
+</html>

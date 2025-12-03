@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        
+        <style>
+         
+        </style>
+        <title>View messages</title>
+</head>
+<body class="bg-neutral-400 flex flex-col mt-10 items-center h-screen font-serif text-3xl gap-4">
+ <h1>View all messages</h1>
+ <button id="back-btn" class="bg-neutral-500 hover:bg-neutral-600 transition-colors ease-in-out text-white text-xl p-5 rounded-full">
+  Home
+  </button> 
+    <div class="w-full max-w-4xl mt-6 overflow-auto max-h-[60vh] p-4 rounded-lg bg-neutral-200">
+        <div class="grid grid-cols-2 gap-6">
+            {% for message in messages %}
+                <div class="mb-4 p-4 bg-neutral-100 rounded-xl shadow-sm">
+                    <p class="text-xl">{{ message.content }}</p>
+                    <p class="text-sm text-neutral-600 mt-2">Posted on: {{ message.timestamp }}</p>
+                </div>
+            {% else %}
+                <div class="col-span-2 flex justify-center items-center h-32 text-white">
+                    <p class="text-lg">No messages to display.</p>
+                </div>
+            {% endfor %}   
+        </div>
+    </div>
+
+</body>
+<script>
+    document.getElementById('back-btn').onclick = function() {
+        window.location.href = '/';
+    };
+
+
+  
+</script>
+</html>

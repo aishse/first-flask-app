@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{url_for('static',filename='dist/output.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        
+        <style>
+         
+        </style>
+        <title>Anishka's Webapp</title>
+</head>
+<body class="bg-neutral-400 flex flex-col justify-center items-center h-screen font-serif text-3xl gap-4">
+ <h1>Welcome to Anishka's webapp!</h1>
+ <button id="add-message-btn" class="bg-neutral-500 hover:bg-neutral-600 transition-colors ease-in-out text-white text-xl p-5 rounded-full">
+  Add a message 
+  </button> 
+  <button id="view-messages-btn" class="bg-neutral-500 hover:bg-neutral-600 transition-colors ease-in-out text-white text-xl p-5 rounded-full">
+  View messages 
+  </button> 
+  <h1 class="text-sm"> Made using Flask and TailwindCSS </h1>
+
+</body>
+<script>
+    document.getElementById('add-message-btn').onclick = function() {
+        window.location.href = '/add';
+    };
+    document.getElementById('view-messages-btn').onclick = function() {
+        window.location.href = '/view';
+    };
+
+</script>
+</html>
